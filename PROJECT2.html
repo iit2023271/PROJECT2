@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grade Calculator</title>
+    <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
+    <style>
+        /* Add your custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group input {
+            width: calc(100% - 22px);
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .showdata {
+            color: #333;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Grade Calculator</h1>
+        <div class="screen-body-item">
+            <div class="app">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Subject 1" id="subject1">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Subject 2" id="subject2">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Subject 3" id="subject3">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Subject 4" id="subject4">
+                </div>
+                <div>
+                    <input type="button" value="Calculate Grade" class="form-button" onclick="calculateGrade()">
+                </div>
+            </div>
+        </div>
+        <div class="form-group showdata">
+            <p id="showdata"></p>
+        </div>
+    </div>
+
+    <script>
+        function calculateGrade() {
+            let subject1 = parseFloat(document.querySelector("#subject1").value) || 0;
+            let subject2 = parseFloat(document.querySelector("#subject2").value) || 0;
+            let subject3 = parseFloat(document.querySelector("#subject3").value) || 0;
+            let subject4 = parseFloat(document.querySelector("#subject4").value) || 0;
+
+            let totalMarks = subject1 + subject2 + subject3 + subject4;
+            let percentage = (totalMarks / 400) * 100;
+            let grade = "";
+
+            if (percentage >= 80) {
+                grade = "A";
+            } else if (percentage >= 60) {
+                grade = "B";
+            } else if (percentage >= 40) {
+                grade = "C";
+            } else {
+                grade = "D";
+            }
+
+            let markingScheme = "A: 80% and above, B: 60-79%, C: 40-59%, D: below 40%";
+
+            document.querySelector("#showdata").innerHTML = `Total Marks: ${totalMarks}<br>
+                                                            Percentage: ${percentage.toFixed(2)}%<br>
+                                                            Grade: ${grade}<br>
+                                                            Marking Scheme: ${markingScheme}`;
+        }
+    </script>
+</body>
+</html>
